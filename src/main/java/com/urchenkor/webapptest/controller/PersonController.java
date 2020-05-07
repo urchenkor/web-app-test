@@ -2,6 +2,7 @@ package com.urchenkor.webapptest.controller;
 
 import com.urchenkor.webapptest.entity.Person;
 import com.urchenkor.webapptest.repository.PersonRepos;
+import com.urchenkor.webapptest.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +15,11 @@ import java.util.Optional;
 public class PersonController {
 
     private PersonRepos personRepos;
+    private PersonService personService;
 
     @Autowired
-    public PersonController(PersonRepos personRepos) {
-        this.personRepos = personRepos;
+    public PersonController(PersonService personService) {
+        this.personService = personService;
     }
 
     @PostMapping("/add")
