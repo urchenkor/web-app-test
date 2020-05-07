@@ -14,7 +14,6 @@ import java.util.Optional;
 @RestController
 public class PersonController {
 
-    private PersonRepos personRepos;
     private PersonService personService;
 
     @Autowired
@@ -25,16 +24,15 @@ public class PersonController {
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> createPerson(@Validated @RequestBody Person person) {
-        personRepos.save(person);
-        Person personFromDb = personRepos.findByName(person.getName());
-        return new ResponseEntity<>("Id =  " + personFromDb.getId(), HttpStatus.CREATED);
+
+        return personService.create(person);
     }
 
-    @GetMapping("/get/{id}")
+    /*@GetMapping("/get/{id}")
     public Person getPerson(@PathVariable Long id) {
         Optional<Person> person = personRepos.findById(id);
 
         return person.isPresent() ? person.get() : null;
-    }
+    }*/
 
 }
