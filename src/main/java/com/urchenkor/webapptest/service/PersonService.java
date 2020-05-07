@@ -1,5 +1,6 @@
 package com.urchenkor.webapptest.service;
 
+import com.urchenkor.webapptest.dto.PersonResponse;
 import com.urchenkor.webapptest.entity.Person;
 import com.urchenkor.webapptest.entity.StatusEnum;
 import com.urchenkor.webapptest.repository.PersonRepos;
@@ -12,14 +13,15 @@ import org.springframework.stereotype.Component;
 public class PersonService {
     PersonRepos personRepos;
 
+
     @Autowired
     public PersonService(PersonRepos personRepos) {
         this.personRepos = personRepos;
     }
 
-    public ResponseEntity<String> create(Person person) {
+    public ResponseEntity<PersonResponse> create(Person person) {
         person.setStatus(StatusEnum.ONLINE);
         personRepos.save(person);
-        return new ResponseEntity<>("Id = " + person.getId(), HttpStatus.CREATED);
+        return new ResponseEntity<>(new PersonResponse(person), HttpStatus.CREATED);
     }
 }

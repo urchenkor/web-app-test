@@ -1,5 +1,6 @@
 package com.urchenkor.webapptest.controller;
 
+import com.urchenkor.webapptest.dto.PersonResponse;
 import com.urchenkor.webapptest.entity.Person;
 import com.urchenkor.webapptest.repository.PersonRepos;
 import com.urchenkor.webapptest.service.PersonService;
@@ -23,7 +24,7 @@ public class PersonController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> createPerson(@Validated @RequestBody Person person) {
+    public ResponseEntity<PersonResponse> createPerson(@Validated @RequestBody Person person) {
 
         return personService.create(person);
     }
