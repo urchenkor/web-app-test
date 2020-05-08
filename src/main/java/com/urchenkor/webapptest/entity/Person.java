@@ -3,6 +3,7 @@ package com.urchenkor.webapptest.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+import java.sql.Date;
 
 @Entity
 @Table(name="person")
@@ -19,6 +20,8 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private StatusEnum status;
 
+    private Long timeStamp;
+
     public Person() {
 
     }
@@ -26,6 +29,14 @@ public class Person {
     public Person(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public StatusEnum getStatus() {

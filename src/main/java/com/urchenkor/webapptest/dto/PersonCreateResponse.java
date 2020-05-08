@@ -2,12 +2,12 @@ package com.urchenkor.webapptest.dto;
 
 import com.urchenkor.webapptest.entity.Person;
 
-public class PersonResponse {
+public class PersonCreateResponse {
     private Long id;
 
-    public PersonResponse() {}
+    public PersonCreateResponse() {}
 
-    public PersonResponse(Person person) {
+    public PersonCreateResponse(Person person) {
         this.id = person.getId();
     }
 
