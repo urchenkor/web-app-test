@@ -1,6 +1,7 @@
 package com.urchenkor.webapptest.controller;
 
 import com.urchenkor.webapptest.dto.PersonCreateResponse;
+import com.urchenkor.webapptest.dto.PersonGetResponse;
 import com.urchenkor.webapptest.dto.StatusUpdateResponse;
 import com.urchenkor.webapptest.entity.Person;
 import com.urchenkor.webapptest.repository.PersonRepos;
@@ -33,15 +34,16 @@ public class PersonController {
     }
 
     @GetMapping("/get/{id}")
-    public Person getPerson(@PathVariable Long id) {
-        Optional<Person> person = personRepos.findById(id);
-
-        return person.isPresent() ? person.get() : null;
+    public ResponseEntity<PersonGetResponse> getPersonData(@PathVariable Long id) {
+        Optional<Person> optional = personRepos.findById(id);
+        Person personFromDb = optional.isPresent() ? optional.get() : null;
+        return personService.getPersonData(personFromDb);
     }
 
-    @PutMapping("/update")
+    @PatchMapping("/update")
     public ResponseEntity<StatusUpdateResponse> updateStatus(@RequestBody Person person) {
         return personService.updateStatus(person);
     }
+
 
 }

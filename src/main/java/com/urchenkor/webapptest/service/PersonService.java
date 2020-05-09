@@ -1,6 +1,7 @@
 package com.urchenkor.webapptest.service;
 
 import com.urchenkor.webapptest.dto.PersonCreateResponse;
+import com.urchenkor.webapptest.dto.PersonGetResponse;
 import com.urchenkor.webapptest.dto.StatusUpdateResponse;
 import com.urchenkor.webapptest.entity.Person;
 import com.urchenkor.webapptest.entity.StatusEnum;
@@ -8,10 +9,8 @@ import com.urchenkor.webapptest.repository.PersonRepos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
 import java.util.Optional;
 
 @Component
@@ -34,6 +33,7 @@ public class PersonService {
     }
 
     public ResponseEntity<StatusUpdateResponse> updateStatus(Person person) {
+
         StatusEnum beforeStatus;
         StatusEnum afterStatus;
         Optional<Person> personFromDb = personRepos.findById(person.getId());
@@ -47,12 +47,17 @@ public class PersonService {
             beforeStatus = person1.getStatus();
 
             person1.setStatus(afterStatus);
-            person1.setTimeStamp(System.currentTimeMillis());
+            if (afterStatus.equals(StatusEnum.ONLINE)) {
+                person1.setTimeStamp(System.currentTimeMillis());
+            }
             personRepos.save(person1);
             return new ResponseEntity<>(new StatusUpdateResponse(person1.getId(), beforeStatus,
                     afterStatus), HttpStatus.OK);
         }
+    }
 
+    public ResponseEntity<PersonGetResponse> getPersonData(Person person) {
+        return new ResponseEntity<>(new PersonGetResponse(person), HttpStatus.OK);
     }
 
 

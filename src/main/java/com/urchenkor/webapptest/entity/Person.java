@@ -1,9 +1,8 @@
 package com.urchenkor.webapptest.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-import java.sql.Date;
 
 @Entity
 @Table(name="person")
@@ -19,6 +18,13 @@ public class Person {
     @Column(name = "STATUS")
     @Enumerated(EnumType.STRING)
     private StatusEnum status;
+
+    @Email
+    @NotNull
+    private String email;
+
+    @NotNull
+    private String phoneNumber;
 
     private Long timeStamp;
 
@@ -63,4 +69,19 @@ public class Person {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }
