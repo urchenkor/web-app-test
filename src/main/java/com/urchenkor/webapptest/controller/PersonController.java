@@ -4,6 +4,8 @@ import com.urchenkor.webapptest.dto.PersonCreateResponse;
 import com.urchenkor.webapptest.dto.PersonGetResponse;
 import com.urchenkor.webapptest.dto.StatusUpdateResponse;
 import com.urchenkor.webapptest.entity.Person;
+import com.urchenkor.webapptest.entity.transport.ExistPerson;
+import com.urchenkor.webapptest.entity.transport.NewPerson;
 import com.urchenkor.webapptest.repository.PersonRepos;
 import com.urchenkor.webapptest.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,8 @@ public class PersonController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<PersonCreateResponse> createPerson(@Validated @RequestBody Person person) {
+    public ResponseEntity<PersonCreateResponse> createPerson(@Validated(NewPerson.class)
+                                                    @RequestBody Person person) {
 
         return personService.create(person);
     }
@@ -41,7 +44,8 @@ public class PersonController {
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<StatusUpdateResponse> updateStatus(@RequestBody Person person) {
+    public ResponseEntity<StatusUpdateResponse> updateStatus(@Validated(ExistPerson.class)
+                                                   @RequestBody Person person) {
         return personService.updateStatus(person);
     }
 

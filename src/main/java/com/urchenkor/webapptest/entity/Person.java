@@ -1,8 +1,12 @@
 package com.urchenkor.webapptest.entity;
 
+import com.urchenkor.webapptest.entity.transport.ExistPerson;
+import com.urchenkor.webapptest.entity.transport.NewPerson;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 @Entity
 @Table(name="person")
@@ -10,22 +14,30 @@ public class Person {
 
     @Id
     @GeneratedValue
+    @Null(groups = {NewPerson.class})
+    @NotNull(groups = {ExistPerson.class})
     private Long id;
 
-    @NotNull
+    @Null(groups = {ExistPerson.class})
+    @NotNull(groups = {NewPerson.class})
     private String name;
 
     @Column(name = "STATUS")
     @Enumerated(EnumType.STRING)
+    @Null(groups = {NewPerson.class})
+    @NotNull(groups = {ExistPerson.class})
     private StatusEnum status;
 
     @Email
-    @NotNull
+    @Null(groups = {ExistPerson.class})
+    @NotNull(groups = {NewPerson.class})
     private String email;
 
-    @NotNull
+    @Null(groups = {ExistPerson.class})
+    @NotNull(groups = {NewPerson.class})
     private String phoneNumber;
 
+    @Null(groups = {NewPerson.class})
     private Long timeStamp;
 
     public Person() {
@@ -36,6 +48,7 @@ public class Person {
         this.id = id;
         this.name = name;
     }
+
 
     public Long getTimeStamp() {
         return timeStamp;
