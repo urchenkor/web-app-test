@@ -1,8 +1,7 @@
 package com.urchenkor.webapptest.service;
 
-import com.urchenkor.webapptest.dto.PersonCreateResponse;
-import com.urchenkor.webapptest.dto.PersonGetResponse;
-import com.urchenkor.webapptest.dto.StatusUpdateResponse;
+import com.urchenkor.webapptest.dto.response.*;
+import com.urchenkor.webapptest.dto.UpdateStatusRequestModel;
 import com.urchenkor.webapptest.entity.Person;
 import com.urchenkor.webapptest.entity.StatusEnum;
 import com.urchenkor.webapptest.repository.PersonRepos;
@@ -32,18 +31,18 @@ public class PersonService {
         return new ResponseEntity<>(new PersonCreateResponse(person), HttpStatus.CREATED);
     }
 
-    public ResponseEntity<StatusUpdateResponse> updateStatus(Person person) {
+    public ResponseEntity<StatusUpdateResponse> updateStatus(UpdateStatusRequestModel model) {
 
         StatusEnum beforeStatus;
         StatusEnum afterStatus;
-        Optional<Person> personFromDb = personRepos.findById(person.getId());
+        Optional<Person> personFromDb = personRepos.findById(model.getId());
         if (!personFromDb.isPresent()) {
-            return null;
+            return new ResponseEntity<>(new StatusUpdateResponseNotFound("person not found"), HttpStatus.NOT_FOUND);
         }
         else {
             Person person1 = personFromDb.get();
 
-            afterStatus = person.getStatus();
+            afterStatus = model.getStatus();
             beforeStatus = person1.getStatus();
 
             person1.setStatus(afterStatus);
@@ -51,7 +50,7 @@ public class PersonService {
                 person1.setTimeStamp(System.currentTimeMillis());
             }
             personRepos.save(person1);
-            return new ResponseEntity<>(new StatusUpdateResponse(person1.getId(), beforeStatus,
+            return new ResponseEntity<>(new StatusUpdateResponseOk(person1.getId(), beforeStatus,
                     afterStatus), HttpStatus.OK);
         }
     }

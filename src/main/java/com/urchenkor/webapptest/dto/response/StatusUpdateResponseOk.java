@@ -1,15 +1,15 @@
-package com.urchenkor.webapptest.dto;
+package com.urchenkor.webapptest.dto.response;
 
 import com.urchenkor.webapptest.entity.StatusEnum;
 
-public class StatusUpdateResponse {
+public class StatusUpdateResponseOk implements StatusUpdateResponse{
     private Long id;
     private StatusEnum beforeUpdateStatus;
     private StatusEnum afterUpdateStatus;
 
-    public StatusUpdateResponse() {}
+    public StatusUpdateResponseOk() {}
 
-    public StatusUpdateResponse(Long id, StatusEnum beforeUpdateStatus, StatusEnum afterUpdateStatus) {
+    public StatusUpdateResponseOk(Long id, StatusEnum beforeUpdateStatus, StatusEnum afterUpdateStatus) {
         this.id = id;
         this.beforeUpdateStatus = beforeUpdateStatus;
         this.afterUpdateStatus = afterUpdateStatus;

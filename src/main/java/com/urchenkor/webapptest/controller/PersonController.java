@@ -1,36 +1,30 @@
 package com.urchenkor.webapptest.controller;
 
-import com.urchenkor.webapptest.dto.PersonCreateResponse;
-import com.urchenkor.webapptest.dto.PersonGetResponse;
-import com.urchenkor.webapptest.dto.StatusUpdateResponse;
+import com.urchenkor.webapptest.dto.response.PersonCreateResponse;
+import com.urchenkor.webapptest.dto.response.PersonGetResponse;
+import com.urchenkor.webapptest.dto.response.StatusUpdateResponse;
+import com.urchenkor.webapptest.dto.response.StatusUpdateResponseOk;
+import com.urchenkor.webapptest.dto.UpdateStatusRequestModel;
 import com.urchenkor.webapptest.entity.Person;
-import com.urchenkor.webapptest.entity.transport.ExistPerson;
 import com.urchenkor.webapptest.entity.transport.NewPerson;
-import com.urchenkor.webapptest.repository.PersonRepos;
 import com.urchenkor.webapptest.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/persons")
 public class PersonController {
 
-    private PersonRepos personRepos;
     private PersonService personService;
 
     @Autowired
-    public PersonController(PersonService personService, PersonRepos personRepos) {
+    public PersonController(PersonService personService) {
         this.personService = personService;
-        this.personRepos = personRepos;
     }
 
     @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<PersonCreateResponse> createPerson(@Validated(NewPerson.class)
                                                     @RequestBody Person person) {
 
@@ -43,9 +37,9 @@ public class PersonController {
     }
 
     @PatchMapping
-    public ResponseEntity<StatusUpdateResponse> updateStatus(@Validated(ExistPerson.class)
-                                                   @RequestBody Person person) {
-        return personService.updateStatus(person);
+    public ResponseEntity<StatusUpdateResponse> updateStatus(@Validated
+                               @RequestBody UpdateStatusRequestModel model) {
+        return personService.updateStatus(model);
     }
 
 

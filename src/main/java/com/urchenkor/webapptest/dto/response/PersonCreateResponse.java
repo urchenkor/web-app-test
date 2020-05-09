@@ -1,4 +1,4 @@
-package com.urchenkor.webapptest.dto;
+package com.urchenkor.webapptest.dto.response;
 
 import com.urchenkor.webapptest.entity.Person;
 
