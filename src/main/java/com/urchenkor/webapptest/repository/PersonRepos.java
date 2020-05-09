@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface PersonRepos extends CrudRepository<Person, Long> {
     List<Person> findByStatus(StatusEnum status);
+
+    List<Person> findByTimeStampLessThanEqualAndStatus(Long timeStamp, StatusEnum status);
 }

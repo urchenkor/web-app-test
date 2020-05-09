@@ -39,9 +39,7 @@ public class PersonController {
 
     @GetMapping("{id}")
     public ResponseEntity<PersonGetResponse> getPersonData(@PathVariable Long id) {
-        Optional<Person> optional = personRepos.findById(id);
-        Person personFromDb = optional.isPresent() ? optional.get() : null;
-        return personService.getPersonData(personFromDb);
+        return personService.getPersonData(id);
     }
 
     @PatchMapping

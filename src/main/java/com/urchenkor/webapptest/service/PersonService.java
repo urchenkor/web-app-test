@@ -56,8 +56,10 @@ public class PersonService {
         }
     }
 
-    public ResponseEntity<PersonGetResponse> getPersonData(Person person) {
-        return new ResponseEntity<>(new PersonGetResponse(person), HttpStatus.OK);
+    public ResponseEntity<PersonGetResponse> getPersonData(Long id) {
+        Optional<Person> optional = personRepos.findById(id);
+        Person personFromDb = optional.isPresent() ? optional.get() : null;
+        return new ResponseEntity<>(new PersonGetResponse(personFromDb), HttpStatus.OK);
     }
 
 
