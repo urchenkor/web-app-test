@@ -2,6 +2,9 @@ package com.urchenkor.webapptest.service;
 
 import com.urchenkor.webapptest.dto.response.*;
 import com.urchenkor.webapptest.dto.UpdateStatusRequestModel;
+import com.urchenkor.webapptest.dto.response.statusUpdate.StatusUpdateResponse;
+import com.urchenkor.webapptest.dto.response.statusUpdate.StatusUpdateResponseNotFound;
+import com.urchenkor.webapptest.dto.response.statusUpdate.StatusUpdateResponseOk;
 import com.urchenkor.webapptest.entity.Person;
 import com.urchenkor.webapptest.entity.StatusEnum;
 import com.urchenkor.webapptest.repository.PersonRepos;

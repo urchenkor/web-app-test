@@ -2,8 +2,7 @@ package com.urchenkor.webapptest.controller;
 
 import com.urchenkor.webapptest.dto.response.PersonCreateResponse;
 import com.urchenkor.webapptest.dto.response.PersonGetResponse;
-import com.urchenkor.webapptest.dto.response.StatusUpdateResponse;
-import com.urchenkor.webapptest.dto.response.StatusUpdateResponseOk;
+import com.urchenkor.webapptest.dto.response.statusUpdate.StatusUpdateResponse;
 import com.urchenkor.webapptest.dto.UpdateStatusRequestModel;
 import com.urchenkor.webapptest.entity.Person;
 import com.urchenkor.webapptest.entity.transport.NewPerson;

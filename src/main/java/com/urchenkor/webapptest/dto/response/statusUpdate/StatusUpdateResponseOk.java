@@ -1,4 +1,4 @@
-package com.urchenkor.webapptest.dto.response;
+package com.urchenkor.webapptest.dto.response.statusUpdate;
 
 import com.urchenkor.webapptest.entity.StatusEnum;
 
