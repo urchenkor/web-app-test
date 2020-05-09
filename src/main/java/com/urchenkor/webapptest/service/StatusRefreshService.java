@@ -12,16 +12,17 @@ import java.util.List;
 @Component
 public class StatusRefreshService {
     private PersonRepos personRepos;
-    private final static long TIMER = 10000; //Время опроса базы данных в мс.
+    private final static long POLLING_TIME = 10000; //Период опроса базы данных в мс.
+    private final static long STATUS_REFRESH_TIME = 300000; //Период обновления статуса в AWAY
 
     @Autowired
     public StatusRefreshService(PersonRepos personRepos) {
         this.personRepos = personRepos;
     }
 
-    @Scheduled(fixedDelay = TIMER / 2)
+    @Scheduled(fixedDelay = POLLING_TIME)
     public void statusRefresher() {
-        long currentTime = System.currentTimeMillis() - TIMER;
+        long currentTime = System.currentTimeMillis() - STATUS_REFRESH_TIME;
         List<Person> onlinePersons = personRepos.findByTimeStampLessThanEqualAndStatus(
                 currentTime, StatusEnum.ONLINE);
         for (Person p : onlinePersons) p.setStatus(StatusEnum.AWAY);
