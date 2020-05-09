@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/persons")
 public class PersonController {
 
     private PersonRepos personRepos;
@@ -28,7 +29,7 @@ public class PersonController {
         this.personRepos = personRepos;
     }
 
-    @PostMapping("/add")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<PersonCreateResponse> createPerson(@Validated(NewPerson.class)
                                                     @RequestBody Person person) {
@@ -36,14 +37,14 @@ public class PersonController {
         return personService.create(person);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<PersonGetResponse> getPersonData(@PathVariable Long id) {
         Optional<Person> optional = personRepos.findById(id);
         Person personFromDb = optional.isPresent() ? optional.get() : null;
         return personService.getPersonData(personFromDb);
     }
 
-    @PatchMapping("/update")
+    @PatchMapping
     public ResponseEntity<StatusUpdateResponse> updateStatus(@Validated(ExistPerson.class)
                                                    @RequestBody Person person) {
         return personService.updateStatus(person);
