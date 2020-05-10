@@ -1,7 +1,7 @@
 package com.urchenkor.webapptest.service;
 
 import com.urchenkor.webapptest.dto.response.*;
-import com.urchenkor.webapptest.dto.UpdateStatusRequestModel;
+import com.urchenkor.webapptest.dto.request.UpdateStatusRequestModel;
 import com.urchenkor.webapptest.dto.response.statusUpdate.StatusUpdateResponse;
 import com.urchenkor.webapptest.dto.response.statusUpdate.StatusUpdateResponseNotFound;
 import com.urchenkor.webapptest.dto.response.statusUpdate.StatusUpdateResponseOk;

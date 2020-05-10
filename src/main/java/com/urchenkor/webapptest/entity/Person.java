@@ -1,6 +1,5 @@
 package com.urchenkor.webapptest.entity;
 
-import com.urchenkor.webapptest.entity.transport.ExistPerson;
 import com.urchenkor.webapptest.entity.transport.NewPerson;
 
 import javax.persistence.*;
@@ -15,25 +14,20 @@ public class Person {
     @Id
     @GeneratedValue
     @Null(groups = {NewPerson.class})
-    @NotNull(groups = {ExistPerson.class})
     private Long id;
 
-    @Null(groups = {ExistPerson.class})
     @NotNull(groups = {NewPerson.class})
     private String name;
 
     @Column(name = "STATUS")
     @Enumerated(EnumType.STRING)
     @Null(groups = {NewPerson.class})
-    @NotNull(groups = {ExistPerson.class})
     private StatusEnum status;
 
     @Email
-    @Null(groups = {ExistPerson.class})
     @NotNull(groups = {NewPerson.class})
     private String email;
 
-    @Null(groups = {ExistPerson.class})
     @NotNull(groups = {NewPerson.class})
     private String phoneNumber;
 
