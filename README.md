@@ -40,8 +40,8 @@ json request example:
 json response example:
       {
       "id": 1,
-      "beforeUpdateStatus": "AWAY",
-      "afterUpdateStatus": "ONLINE"
+      "beforeUpdateStatus":"AWAY",
+      "afterUpdateStatus":"ONLINE"
       }
 
 
